@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { TextInput, Button, Paper, Stack, Alert, Text } from '@mantine/core';
+import { IconSearch, IconAlertCircle } from '@tabler/icons-react';
 import { search } from '../app/api';
 
 interface SearchResult {
@@ -40,47 +42,55 @@ export function SearchBar() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-2">
-        <input
-          type="text"
+    <Paper shadow="sm" p="md" radius="md">
+      <Stack gap="md">
+        <TextInput
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Search for ICD-10 codes or descriptions"
-          className="flex-1 p-2 border rounded"
-          disabled={isLoading}
+          placeholder="Search ICD-10 codes"
+          leftSection={<IconSearch size={16} style={{ color: 'var(--mantine-color-gray-5)' }} />}
+          rightSectionWidth={85}
+          rightSection={
+            <Button
+              onClick={handleSearch}
+              loading={isLoading}
+              size="sm"
+              variant="light"
+            >
+              Search
+            </Button>
+          }
         />
-        <button
-          type="button"
-          onClick={handleSearch}
-          disabled={isLoading}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-blue-300"
-        >
-          {isLoading ? 'Searching...' : 'Search'}
-        </button>
-      </div>
 
-      {error && (
-        <div className="text-red-500 p-2 border border-red-200 rounded bg-red-50">
-          {error}
-        </div>
-      )}
-
-      <div className="search-results">
-        {results.length === 0 ? (
-          <p className="text-gray-500">No results found</p>
-        ) : (
-          <ul className="space-y-2">
-            {results.map((result) => (
-              <li key={result.code} className="p-2 border rounded hover:bg-gray-50">
-                <h3 className="font-bold">{result.code}</h3>
-                <p className="text-gray-700">{result.description}</p>
-              </li>
-            ))}
-          </ul>
+        {error && (
+          <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light" p="xs">
+            {error}
+          </Alert>
         )}
-      </div>
-    </div>
+
+        {results.length > 0 && (
+          <Paper pt="xs">
+            {results.map((result) => (
+              <Paper 
+                key={result.code}
+                p="xs"
+                style={{ 
+                  cursor: 'pointer',
+                  '&:hover': {
+                    backgroundColor: 'var(--mantine-color-gray-0)'
+                  }
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                  <Text fw={600} size="sm" style={{ minWidth: '80px' }}>{result.code}</Text>
+                  <Text size="sm">{result.description}</Text>
+                </div>
+              </Paper>
+            ))}
+          </Paper>
+        )}
+      </Stack>
+    </Paper>
   );
 } 
