@@ -1,10 +1,10 @@
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import { Welcome } from '../components/Welcome/Welcome';
+import { SearchBar } from '../components/SearchBar';
 
 export default function HomePage() {
   return (
     <>
-      Starting point.
+      <h1>ICD Search</h1>
+      <SearchBar />
     </>
   );
 }
