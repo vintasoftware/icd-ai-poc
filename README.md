@@ -1,37 +1,33 @@
-# Mantine Next.js template
+# ICD-10 AI Code Search
 
-This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
-If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
+Welcome! This is a proof of concept that looks to leverage AI to sort ICD-10 codes into either Problems or Allergies. This example comes from a real need we identified in one of our projects and we decided to make it public so the whole community can benefit from the experiment.
 
-## Features
+## How to run the example
 
-This template comes with the following features:
+1. Clone the repository.
+2. Set up a `.env` file with your OpenAI API key.
+3. Run the project with `npm run dev`.
+4. Access it at `localhost:3000`.
 
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Important considerations
 
-## npm scripts
+### AI models
 
-### Build and dev scripts
+Different OpenAI models were tested during the development of this proof of concept, here are the ones that were considered:
 
-- `dev` – start dev server
-- `build` – bundle application for production
-- `analyze` – analyzes application bundle with [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
+- GPT-4 Turbo
+- GPT-4.1
+- GPT-4.5 Preview
+- o3-mini
+- o1
 
-### Testing scripts
+After manual testing, we found that o1 model produced the most consistent results.
 
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `jest` – runs jest tests
-- `jest:watch` – starts jest watch
-- `test` – runs `jest`, `prettier:check`, `lint` and `typecheck` scripts
+### Production use
 
-### Other scripts
+This is not a production-ready solution. EHR development demands caution, as mistakes can have serious consequences for patients and providers. However, this can be used as an experimental feature provided that:
 
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+- You implement code to verify that the AI’s filtered results are correct and present in the original list.
+- Users can always access the full, unfiltered list from your chosen ICD-10 source.
+
+Enjoy!
