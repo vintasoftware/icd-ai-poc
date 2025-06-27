@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     `;
 
     const openAIResponse = await openai.chat.completions.create({
-      model: "gpt-4-turbo",
+      model: "o1",
       messages: [
         {
           role: "user",
