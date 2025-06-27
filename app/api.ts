@@ -1,7 +1,14 @@
+// ICD-10 API
 const API_BASE_URL = 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search';
 
 // The API returns data in this format: [totalCount, codes[], extras, displayStrings[][]]
 type APIResponse = [number, string[], null, [string, string][]];
+
+// Define the type for the ICD codes
+interface ICDCode {
+  code: string;
+  description: string;
+}
 
 export async function search(query: string): Promise<{ code: string; description: string }[]> {
   if (!query.trim()) {
@@ -32,3 +39,25 @@ export async function search(query: string): Promise<{ code: string; description
     throw error;
   }
 } 
+
+export const classifyICDCodes = async (codes: ICDCode[], category: string) => {
+  const response = await fetch('/api/openai', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ codes, category }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to classify ICD codes');
+  }
+
+  return await response.json();
+};
+
+export const AIPoweredSearch = async (query: string, category: string) => {
+  const codes = await search(query);
+  const response = await classifyICDCodes(codes, category);
+  return response;
+};
