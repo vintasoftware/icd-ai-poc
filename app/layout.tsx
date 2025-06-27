@@ -5,8 +5,8 @@ import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/c
 import { theme } from '../theme';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'ICD-10 AI Search',
+  description: 'An AI-powered search tool for ICD-10 codes.',
 };
 
 export default function RootLayout({ children }: { children: any }) {
