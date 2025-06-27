@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { TextInput, Button, Paper, Stack } from '@mantine/core';
+import { TextInput, Button, Paper, Group } from '@mantine/core';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -18,27 +18,24 @@ export function SearchBar({ onSearch, loading }: SearchBarProps) {
 
   return (
     <Paper withBorder p="md">
-      <Stack gap="xs">
+      <Group style={{ flexWrap: 'nowrap' }}>
         <TextInput
           placeholder="Search ICD-10 codes..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          rightSectionWidth={85}
-          rightSection={
-            <Button
-              size="sm"
-              variant="light"
-              onClick={handleSearch}
-              loading={loading}
-              mr="xs"
-            >
-              Search
-            </Button>
-          }
-          rightSectionPointerEvents="auto"
+          style={{ width: '100%' }}
         />
-      </Stack>
+        <Button
+          size="sm"
+          variant="light"
+          onClick={handleSearch}
+          loading={loading}
+          style={{ flexShrink: 0 }}
+        >
+          Search
+        </Button>
+      </Group>
     </Paper>
-  );
+  );  
 } 

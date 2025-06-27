@@ -15,6 +15,7 @@ export default function HomePage() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (query: string) => {
     if (!query.trim()) {
@@ -24,6 +25,7 @@ export default function HomePage() {
     setLoading(true);
     setError(null);
     setResults([]);
+    setHasSearched(true);
 
     try {
       let searchResults;
@@ -42,6 +44,13 @@ export default function HomePage() {
     }
   };
 
+  const handleTabChange = (newTab: string | null) => {
+    setActiveTab(newTab);
+    setResults([]);
+    setError(null);
+    setHasSearched(false);
+  };
+
   return (
     <Container size="sm" py="xl">
       <Stack gap="lg">
@@ -49,7 +58,7 @@ export default function HomePage() {
         
         <SearchBar onSearch={handleSearch} loading={loading} />
 
-        <Tabs value={activeTab} onChange={setActiveTab}>
+        <Tabs value={activeTab} onChange={handleTabChange}>
           <Tabs.List>
             <Tabs.Tab value="all">All Codes</Tabs.Tab>
             <Tabs.Tab value="problems">Problems</Tabs.Tab>
@@ -61,6 +70,18 @@ export default function HomePage() {
           <Alert color="red" title="Error" mt="md">
             {error}
           </Alert>
+        )}
+
+        {!loading && !hasSearched && !error && (
+          <Text ta="center" mt="md">
+            Your results will appear here.
+          </Text>
+        )}
+
+        {!loading && hasSearched && results.length === 0 && !error && (
+          <Text ta="center" mt="md">
+            No results found.
+          </Text>
         )}
 
         {results.length > 0 && (
