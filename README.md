@@ -31,3 +31,9 @@ This is not a production-ready solution. EHR development demands caution, as mis
 - Users can always access the full, unfiltered list from your chosen ICD-10 source.
 
 Enjoy!
+
+## Commercial Support
+
+[![Vinta Software Logo](https://avatars2.githubusercontent.com/u/5529080?s=80&v=4 "Vinta Logo")](https://www.vintasoftware.com/)
+
+This is an open-source project maintained by [Vinta Software](https://www.vinta.com.br/). We are always looking for exciting work! If you need any commercial support, feel free to get in touch: contact@vinta.com.br
