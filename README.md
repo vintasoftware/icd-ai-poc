@@ -2,6 +2,10 @@
 
 Welcome! This is a proof of concept that looks to leverage AI to sort ICD-10 codes into either Problems or Allergies. This example comes from a real need we identified in one of our projects and we decided to make it public so the whole community can benefit from the experiment.
 
+## Demo video
+
+[![Sorting ICD-10 into categories with AI](http://img.youtube.com/vi/evU1zOTS8Bg/0.jpg)](http://www.youtube.com/watch?v=evU1zOTS8Bg "Sorting ICD-10 into categories with AI")
+
 ## How to run the example
 
 1. Clone the repository.
